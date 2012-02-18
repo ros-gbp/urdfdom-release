@@ -1,0 +1,17 @@
+Catkin-ProjectName: urdfdom
+Version: 0.1.0
+
+Depends: cmake,
+    tinyxml,
+    boost,
+    gtest,
+    pkg-config
+
+Description: urdfdom is a parser and interface for the URDF
+
+Author: John Hsu <johnhsu@willowgarage.com>
+Maintainer: John Hsu <johnhsu@willowgarage.com>
+Homepage: http://www.ros.org/wiki/urdf
+
+Catkin-CopyrightType:  willowgarage
+Catkin-DebRulesType: cmake
