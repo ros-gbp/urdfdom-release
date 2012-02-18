@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: urdf_interface
+Description: URDF Libraries
+Version: @URDF_VERSION@
+Requires:
+Libs: -Wl,-rpath,${libdir},-rpath,${prefix}/lib/urdf_interface-@URDF_VERSION@/plugins -L${libdir}
+CFlags: -I${includedir}/urdf_interface-@URDF_VERSION@/urdf_interface
