@@ -1,0 +1,13 @@
+Source: ros-fuerte-urdfdom
+Section: misc
+Priority: extra
+Maintainer: John Hsu <johnhsu@willowgarage.com>
+Build-Depends: debhelper (>= 7.0.50~), libgtest-dev,libboost1.40-all-dev,cmake,libtinyxml-dev,pkg-config
+Homepage: http://www.ros.org/wiki/urdf
+Standards-Version: 3.9.2
+
+Package: ros-fuerte-urdfdom
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgtest-dev,libboost1.40-all-dev,cmake,libtinyxml-dev,pkg-config
+Description: urdfdom is a parser and interface for the URDF
+
