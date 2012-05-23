@@ -1,10 +1,10 @@
 Catkin-ProjectName: urdfdom
 Version: 0.1.0
+Tag: 432
 
 Depends: cmake,
     tinyxml,
     boost,
-    gtest,
     pkg-config
 
 Description: urdfdom is a parser and interface for the URDF
