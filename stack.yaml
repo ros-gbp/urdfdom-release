@@ -1,6 +1,6 @@
 Catkin-ProjectName: urdfdom
-Version: 0.1.2
-Release-Tag: 434
+Version: 0.1.3
+Release-Tag: 435
 
 Depends: cmake,
     tinyxml,
