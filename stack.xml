@@ -1,0 +1,18 @@
+<stack>
+  <name>urdfdom</name>
+  <version>0.1.3</version>
+  <description>urdfdom is a parser and interface for the URDF</description>
+  <author email="johnhsu@willowgarage.com">John Hsu</author>
+  <maintainer email="johnhsu@willowgarage.com">John Hsu</maintainer>
+  <license>BSD</license>
+  <copyright>Willow Garage</copyright>
+  <url>http://www.ros.org/wiki/urdf</url>
+
+  <build_depends>boost</build_depends>
+  <build_depends>cmake</build_depends>
+  <build_depends>pkg-config</build_depends>
+  <build_depends>tinyxml</build_depends>
+
+  <depends>boost</depends>
+  <depends>tinyxml</depends>
+</stack>
