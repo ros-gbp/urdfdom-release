@@ -1,13 +1,13 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-*
+* 
 *  Copyright (c) 2008, Willow Garage, Inc.
 *  All rights reserved.
-*
+* 
 *  Redistribution and use in source and binary forms, with or without
 *  modification, are permitted provided that the following conditions
 *  are met:
-*
+* 
 *   * Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   * Redistributions in binary form must reproduce the above
@@ -17,7 +17,7 @@
 *   * Neither the name of the Willow Garage nor the names of its
 *     contributors may be used to endorse or promote products derived
 *     from this software without specific prior written permission.
-*
+* 
 *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,71 +32,93 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-/* Author: Josh Faust */
+/* Author: Wim Meeussen, John Hsu */
 
-#ifndef URDF_INTERFACE_COLOR_H
-#define URDF_INTERFACE_COLOR_H
 
-#include <string>
-#include <vector>
-#include <math.h>
-#include <boost/algorithm/string.hpp>
+#include <urdf_model/pose.h>
+#include <fstream>
+#include <sstream>
 #include <boost/lexical_cast.hpp>
+#include <algorithm>
+#include <urdf_parser/exceptions.h>
 
-namespace urdf
+namespace urdf{
+
+void Vector3::init(const std::string &vector_str)
 {
-
-class Color
-{
-public:
-  Color() {this->clear();};
-  float r;
-  float g;
-  float b;
-  float a;
-
-  void clear()
-  {
-    r = g = b = 0.0f;
-    a = 1.0f;
+  this->clear();
+  std::vector<std::string> pieces;
+  std::vector<double> xyz;
+  boost::split( pieces, vector_str, boost::is_any_of(" "));
+  for (unsigned int i = 0; i < pieces.size(); ++i){
+    if (pieces[i] != ""){
+      try {
+        xyz.push_back(boost::lexical_cast<double>(pieces[i].c_str()));
+      }
+      catch (boost::bad_lexical_cast &e) {
+        throw ParseError("Vector3 xyz element ("+ pieces[i] +") is not a valid float");
+      }
+    }
   }
-  bool init(const std::string &vector_str)
+
+  if (xyz.size() != 3) {
+    std::stringstream stm;
+    stm << "Vector contains " << xyz.size()  << "elements instead of 3 elements";
+    throw ParseError(stm.str());
+  }
+
+  this->x = xyz[0];
+  this->y = xyz[1];
+  this->z = xyz[2];
+
+};
+
+void Rotation::init(const std::string &rotation_str)
+{
+  this->clear();
+
+  Vector3 rpy;
+  
+  try {
+    rpy.init(rotation_str);
+  }
+  catch (ParseError &e) {
+    throw e.addMessage("malfomed rpy string ["+rotation_str+"]");
+  }
+    
+};
+
+void Pose::initXml(TiXmlElement* xml)
+{
+  this->clear();
+  if (xml)
   {
-    this->clear();
-    std::vector<std::string> pieces;
-    std::vector<float> rgba;
-    boost::split( pieces, vector_str, boost::is_any_of(" "));
-    for (unsigned int i = 0; i < pieces.size(); ++i)
+    const char* xyz_str = xml->Attribute("xyz");
+    if (xyz_str != NULL)
     {
-      if (!pieces[i].empty())
-      {
-        try
-        {
-          rgba.push_back(boost::lexical_cast<double>(pieces[i].c_str()));
-        }
-        catch (boost::bad_lexical_cast &e)
-        {
-          throw("color rgba element ("+pieces[i]+") is not a valid float");
-        }
+      try {
+        this->position.init(xyz_str);
+      }
+      catch (ParseError &e) {
+        throw e.addMessage("malformed xyz string ["+std::string(xyz_str)+"]");
       }
     }
 
-    if (rgba.size() != 4)
+    const char* rpy_str = xml->Attribute("rpy");
+    if (rpy_str != NULL)
     {
-      //ROS_ERROR("Color contains %i elements instead of 4 elements", (int)rgba.size());
-      return false;
+      try {
+        this->rotation.init(rpy_str);
+      }
+      catch (ParseError &e) {
+        this->rotation.clear();
+        throw e.addMessage("malformed rpy ["+std::string(rpy_str)+"]");
+      }
     }
 
-    this->r = rgba[0];
-    this->g = rgba[1];
-    this->b = rgba[2];
-    this->a = rgba[3];
-
-    return true;
-  };
+  }
 };
 
 }
 
-#endif
 
