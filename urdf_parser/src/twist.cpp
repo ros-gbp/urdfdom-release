@@ -32,22 +32,51 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-/* Author: Wim Meeussen */
+/* Author: John Hsu */
 
-#ifndef URDF_PARSER_URDF_PARSER_H
-#define URDF_PARSER_URDF_PARSER_H
 
-#include <string>
-#include <map>
-#include <tinyxml.h>
-#include <boost/function.hpp>
-#include <urdf_model/model.h>
-
+#include <urdf_model_state/twist.h>
+#include <fstream>
+#include <sstream>
+#include <boost/lexical_cast.hpp>
+#include <algorithm>
+#include <urdf_parser/exceptions.h>
 
 namespace urdf{
 
-  boost::shared_ptr<ModelInterface> parseURDF(const std::string &xml_string);
+void Twist::initXml(TiXmlElement* xml)
+{
+  this->clear();
+  if (xml)
+  {
+    const char* linear_str = xml->Attribute("linear");
+    if (linear_str != NULL)
+    {
+      try {
+        this->linear.init(linear_str);
+      }
+      catch (ParseError &e) {
+        this->linear.clear();
+        throw e.addMessage("malformed linear string ["+std::string(linear_str)+"]");
+      }
+    }
+
+    const char* angular_str = xml->Attribute("angular");
+    if (angular_str != NULL)
+    {
+      try {
+        this->angular.init(angular_str);
+      }
+      catch (ParseError &e) {
+        this->angular.clear();
+        throw e.addMessage("malformed angular ["+std::string(angular_str)+"]");
+      }
+    }
+
+  }
+};
 
 }
 
-#endif
+
+
