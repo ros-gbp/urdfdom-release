@@ -1,6 +1,6 @@
 <stack>
   <name>urdfdom</name>
-  <version>0.1.8</version>
+  <version>0.1.9</version>
   <description>urdfdom is a parser and interface for the URDF</description>
   <author email="johnhsu@willowgarage.com">John Hsu</author>
   <maintainer email="johnhsu@willowgarage.com">John Hsu</maintainer>
