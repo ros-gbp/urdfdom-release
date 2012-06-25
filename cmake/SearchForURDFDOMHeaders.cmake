@@ -1,5 +1,3 @@
-include (CheckCXXSourceCompiles)
-
 set (urdfdom_headers_include_dirs "" CACHE STRING "urdfdom_headers include paths. Use this to override automatic detection.")
 set (urdfdom_headers_cflags "" CACHE STRING "urdfdom_headers Use this cflag to enable string support.")
 
@@ -30,7 +28,7 @@ if (PKG_CONFIG_FOUND)
           "urdfdom_headers include paths. Use this to override automatic detection.")
       else (NOT urdfdom_headers_include_dir)
         message (STATUS "Looking for urdf_model/link.h - found")
-        set (assim_include_dirs ${urdfdom_headers_include_dir} CACHE STRING
+        set (urdfdom_headers_include_dirs ${urdfdom_headers_include_dir} CACHE STRING
           "urdfdom_headers include paths. Use this to override automatic detection.")
       endif (NOT urdfdom_headers_include_dir)
       
