@@ -2,12 +2,12 @@ Source: ros-groovy-urdfdom
 Section: misc
 Priority: extra
 Maintainer: John Hsu <johnhsu@willowgarage.com>
-Build-Depends: debhelper (>= 7.0.50~), libboost1.46-all-dev,cmake,ros-groovy-urdfdom-headers,ros-groovy-console-bridge,libtinyxml-dev,pkg-config
+Build-Depends: debhelper (>= 7.0.50~), cmake,libboost-all-dev,ros-groovy-urdfdom-headers,ros-groovy-console-bridge,libtinyxml-dev,pkg-config
 Homepage: http://www.ros.org/wiki/urdf
 Standards-Version: 3.9.2
 
 Package: ros-groovy-urdfdom
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ros-groovy-console-bridge,libboost1.46-all-dev,ros-groovy-urdfdom-headers,libtinyxml-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-groovy-console-bridge,ros-groovy-urdfdom-headers,libtinyxml-dev,libboost-all-dev
 Description: urdfdom is a parser and interface for the URDF
 
