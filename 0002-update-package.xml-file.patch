@@ -1,7 +1,7 @@
 From fbb3f08d2231f95f10acf58d16696d9bd1db5e1c Mon Sep 17 00:00:00 2001
 From: John Hsu <hsu@osrfoundation.org>
 Date: Wed, 10 Oct 2012 08:59:40 -0700
-Subject: [PATCH 2/2] update package.xml file
+Subject: [PATCH 2/3] update package.xml file
 
 ---
  package.xml |   40 ++++++++++++++++++++--------------------

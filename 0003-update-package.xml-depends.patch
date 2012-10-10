@@ -1,0 +1,34 @@
+From 821eb795bdcf022dee880fe0ae6e48b353bc1b15 Mon Sep 17 00:00:00 2001
+From: John Hsu <hsu@osrfoundation.org>
+Date: Wed, 10 Oct 2012 10:26:35 -0700
+Subject: [PATCH 3/3] update package.xml depends
+
+---
+ package.xml |   11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/package.xml b/package.xml
+index 62d78ef..f8a3d7a 100644
+--- a/package.xml
++++ b/package.xml
+@@ -12,9 +12,14 @@
+ 
+   <author>Wim Meeussen, John Hsu</author>
+ 
+-  <build_depend>urdfdom_headers</build_depend>
++  <build_depend version_gte="0.2.1">urdfdom_headers</build_depend>
++  <run_depend version_gte="0.2.1">urdfdom_headers</run_depend>
+ 
+-  <buildtool_depend>cmake</buildtool_depend>
++  <build_depend>boost</build_depend>
++  <run_depend>boost</run_depend>
++
++  <build_depend>tinyxml</build_depend>
++  <run_depend>tinyxml</run_depend>
+ 
+-  <run_depend>urdfdom_headers</run_depend>
++  <buildtool_depend>cmake</buildtool_depend>
+ </package>
+-- 
+1.7.9.5
+
