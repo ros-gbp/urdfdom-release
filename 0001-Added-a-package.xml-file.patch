@@ -1,7 +1,7 @@
 From cd2015f16632a566e0d2adf7f4e0c822b7c1a0d4 Mon Sep 17 00:00:00 2001
 From: hsu <hsu@lcp1>
 Date: Wed, 10 Oct 2012 08:53:39 -0700
-Subject: [PATCH] Added a package.xml file
+Subject: [PATCH 1/2] Added a package.xml file
 
 ---
  package.xml |   20 ++++++++++++++++++++

@@ -1,0 +1,59 @@
+From fbb3f08d2231f95f10acf58d16696d9bd1db5e1c Mon Sep 17 00:00:00 2001
+From: John Hsu <hsu@osrfoundation.org>
+Date: Wed, 10 Oct 2012 08:59:40 -0700
+Subject: [PATCH 2/2] update package.xml file
+
+---
+ package.xml |   40 ++++++++++++++++++++--------------------
+ 1 file changed, 20 insertions(+), 20 deletions(-)
+ rewrite package.xml (71%)
+
+diff --git a/package.xml b/package.xml
+dissimilarity index 71%
+index ec564a0..62d78ef 100644
+--- a/package.xml
++++ b/package.xml
+@@ -1,20 +1,20 @@
+-<?xml version="1.0"?>
+-<package>
+-  <name>urdfdom</name>
+-  <version>0.2.3</version>
+-  <description></description>
+-  <maintainer email="______FILL_ME_OUT______">______FILL_ME_OUT______</maintainer>
+-  <license>______FILL_ME_OUT______</license>
+-
+-  <url type="website">______FILL_ME_OUT______</url>
+-  <url type="bugtracker">______FILL_ME_OUT______</url>
+-  <url type="repository">______FILL_ME_OUT______</url>
+-
+-  <author>______FILL_ME_OUT______</author>
+-
+-  <build_depend>______FILL_ME_OUT______</build_depend>
+-
+-  <buildtool_depend>cmake</buildtool_depend>
+-
+-  <run_depend>______FILL_ME_OUT______</run_depend>
+-</package>
++<?xml version="1.0"?>
++<package>
++  <name>urdfdom</name>
++  <version>0.2.3</version>
++  <description></description>
++  <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
++  <license>BSD</license>
++
++  <url type="website">http://ros.org/wiki/urdf</url>
++  <url type="bugtracker">https://code.ros.org/trac/ros-pkg</url>
++  <url type="repository">http://kforge.ros.org/robotmodel/urdfdom</url>
++
++  <author>Wim Meeussen, John Hsu</author>
++
++  <build_depend>urdfdom_headers</build_depend>
++
++  <buildtool_depend>cmake</buildtool_depend>
++
++  <run_depend>urdfdom_headers</run_depend>
++</package>
+-- 
+1.7.9.5
+
