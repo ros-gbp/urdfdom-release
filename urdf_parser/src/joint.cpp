@@ -39,6 +39,7 @@
 #include <boost/lexical_cast.hpp>
 #include <console_bridge/console.h>
 #include <tinyxml.h>
+#include <urdf_parser/urdf_parser.h>
 
 namespace urdf{
 
@@ -558,6 +559,121 @@ bool parseJoint(Joint &joint, TiXmlElement* config)
     }
   }
 
+  return true;
+}
+
+
+/* exports */
+bool exportPose(Pose &pose, TiXmlElement* xml);
+
+bool exportJointDynamics(JointDynamics &jd, TiXmlElement* xml)
+{
+  TiXmlElement *dynamics_xml = new TiXmlElement("dynamics");
+  dynamics_xml->SetAttribute("damping", urdf_export_helpers::values2str(jd.damping) );
+  dynamics_xml->SetAttribute("friction", urdf_export_helpers::values2str(jd.friction) );
+  xml->LinkEndChild(dynamics_xml);
+  return true;
+}
+
+bool exportJointLimits(JointLimits &jl, TiXmlElement* xml)
+{
+  TiXmlElement *limit_xml = new TiXmlElement("limit");
+  limit_xml->SetAttribute("effort", urdf_export_helpers::values2str(jl.effort) );
+  limit_xml->SetAttribute("velocity", urdf_export_helpers::values2str(jl.velocity) );
+  limit_xml->SetAttribute("lower", urdf_export_helpers::values2str(jl.lower) );
+  limit_xml->SetAttribute("upper", urdf_export_helpers::values2str(jl.upper) );
+  xml->LinkEndChild(limit_xml);
+  return true;
+}
+
+bool exportJointSafety(JointSafety &js, TiXmlElement* xml)
+{
+  TiXmlElement *safety_xml = new TiXmlElement("safety_controller");
+  safety_xml->SetAttribute("k_position", urdf_export_helpers::values2str(js.k_position) );
+  safety_xml->SetAttribute("k_velocity", urdf_export_helpers::values2str(js.k_velocity) );
+  safety_xml->SetAttribute("soft_lower_limit", urdf_export_helpers::values2str(js.soft_lower_limit) );
+  safety_xml->SetAttribute("soft_upper_limit", urdf_export_helpers::values2str(js.soft_upper_limit) );
+  xml->LinkEndChild(safety_xml);
+  return true;
+}
+
+bool exportJointCalibration(JointCalibration &jc, TiXmlElement* xml)
+{
+  if (jc.falling || jc.rising)
+  {
+    TiXmlElement *calibration_xml = new TiXmlElement("calibration");
+    if (jc.falling)
+      calibration_xml->SetAttribute("falling", urdf_export_helpers::values2str(*jc.falling) );
+    if (jc.rising)
+      calibration_xml->SetAttribute("rising", urdf_export_helpers::values2str(*jc.rising) );
+    //calibration_xml->SetAttribute("reference_position", urdf_export_helpers::values2str(jc.reference_position) );
+    xml->LinkEndChild(calibration_xml);
+  }
+  return true;
+}
+
+bool exportJointMimic(JointMimic &jm, TiXmlElement* xml)
+{
+  if (!jm.joint_name.empty())
+  {
+    TiXmlElement *mimic_xml = new TiXmlElement("mimic");
+    mimic_xml->SetAttribute("offset", urdf_export_helpers::values2str(jm.offset) );
+    mimic_xml->SetAttribute("multiplier", urdf_export_helpers::values2str(jm.multiplier) );
+    mimic_xml->SetAttribute("joint", jm.joint_name );
+    xml->LinkEndChild(mimic_xml);
+  }
+  return true;
+}
+
+bool exportJoint(Joint &joint, TiXmlElement* xml)
+{
+  TiXmlElement * joint_xml = new TiXmlElement("joint");
+  joint_xml->SetAttribute("name", joint.name);
+  if (joint.type == urdf::Joint::PLANAR)
+    joint_xml->SetAttribute("type", "planar");
+  else if (joint.type == urdf::Joint::FLOATING)
+    joint_xml->SetAttribute("type", "floating");
+  else if (joint.type == urdf::Joint::REVOLUTE)
+    joint_xml->SetAttribute("type", "revolute");
+  else if (joint.type == urdf::Joint::CONTINUOUS)
+    joint_xml->SetAttribute("type", "continuous");
+  else if (joint.type == urdf::Joint::PRISMATIC)
+    joint_xml->SetAttribute("type", "prismatic");
+  else if (joint.type == urdf::Joint::FIXED)
+    joint_xml->SetAttribute("type", "fixed");
+  else
+    logError("ERROR:  Joint [%s] type [%d] is not a defined type.\n",joint.name.c_str(), joint.type);
+
+  // origin
+  exportPose(joint.parent_to_joint_origin_transform, joint_xml);
+
+  // axis
+  TiXmlElement * axis_xml = new TiXmlElement("axis");
+  axis_xml->SetAttribute("xyz", urdf_export_helpers::values2str(joint.axis));
+  joint_xml->LinkEndChild(axis_xml);
+
+  // parent 
+  TiXmlElement * parent_xml = new TiXmlElement("parent");
+  parent_xml->SetAttribute("link", joint.parent_link_name);
+  joint_xml->LinkEndChild(parent_xml);
+
+  // child
+  TiXmlElement * child_xml = new TiXmlElement("child");
+  child_xml->SetAttribute("link", joint.child_link_name);
+  joint_xml->LinkEndChild(child_xml);
+
+  if (joint.dynamics)
+    exportJointDynamics(*(joint.dynamics), joint_xml);
+  if (joint.limits)
+    exportJointLimits(*(joint.limits), joint_xml);
+  if (joint.safety)
+    exportJointSafety(*(joint.safety), joint_xml);
+  if (joint.calibration)
+    exportJointCalibration(*(joint.calibration), joint_xml);
+  if (joint.mimic)
+    exportJointMimic(*(joint.mimic), joint_xml);
+
+  xml->LinkEndChild(joint_xml);
   return true;
 }
 
