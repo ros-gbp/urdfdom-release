@@ -1,0 +1,13 @@
+Source: ros-fuerte-urdfdom
+Section: misc
+Priority: extra
+Maintainer: John Hsu <hsu@osrfoundation.org>
+Build-Depends: debhelper (>= 7.0.50~), libtinyxml-dev,libboost1.40-all-dev,cmake,ros-fuerte-urdfdom-headers
+Homepage: http://ros.org/wiki/urdf
+Standards-Version: 3.9.2
+
+Package: ros-fuerte-urdfdom
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libtinyxml-dev,libboost1.40-all-dev,ros-fuerte-urdfdom-headers
+Description: 
+
