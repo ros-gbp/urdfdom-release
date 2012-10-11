@@ -2,12 +2,12 @@ Source: ros-fuerte-urdfdom
 Section: misc
 Priority: extra
 Maintainer: John Hsu <hsu@osrfoundation.org>
-Build-Depends: debhelper (>= 7.0.50~), libtinyxml-dev,libboost1.40-all-dev,cmake,ros-fuerte-urdfdom-headers
+Build-Depends: debhelper (>= 7.0.50~), libboost1.46-all-dev,libtinyxml-dev,ros-fuerte-urdfdom-headers,cmake
 Homepage: http://ros.org/wiki/urdf
 Standards-Version: 3.9.2
 
 Package: ros-fuerte-urdfdom
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libtinyxml-dev,libboost1.40-all-dev,ros-fuerte-urdfdom-headers
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost1.46-all-dev,libtinyxml-dev,ros-fuerte-urdfdom-headers
 Description: A library to access URDFs using the DOM model.
 
