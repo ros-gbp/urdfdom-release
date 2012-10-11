@@ -1,0 +1,25 @@
+From 011eefee1d4ea681060a2c20026c3056f139c79a Mon Sep 17 00:00:00 2001
+From: Tully Foote <tfoote@willowgarage.com>
+Date: Wed, 10 Oct 2012 18:41:05 -0700
+Subject: [PATCH 4/4] adding a description
+
+---
+ package.xml |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/package.xml b/package.xml
+index f8a3d7a..f3c2468 100644
+--- a/package.xml
++++ b/package.xml
+@@ -2,7 +2,7 @@
+ <package>
+   <name>urdfdom</name>
+   <version>0.2.3</version>
+-  <description></description>
++  <description>A library to access URDFs using the DOM model.</description>
+   <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
+   <license>BSD</license>
+ 
+-- 
+1.7.0.4
+
