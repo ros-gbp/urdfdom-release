@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>urdfdom</name>
-  <version>0.2.4</version>
+  <version>0.2.5</version>
   <description>A library to access URDFs using the DOM model.</description>
   <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
   <license>BSD</license>
@@ -10,7 +10,7 @@
   <author>John Hsu</author>
   <url type="website">http://ros.org/wiki/urdf</url>
   <url type="bugtracker">https://code.ros.org/trac/ros-pkg</url>
-  <url type="repository">http://kforge.ros.org/robotmodel/urdfdom</url>
+  <url type="repository">https://bitbucket.org/osrf/urdfdom</url>
 
   <build_depend>boost</build_depend>
   <build_depend>catkin</build_depend>
