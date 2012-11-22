@@ -1,11 +1,11 @@
-From fbb3f08d2231f95f10acf58d16696d9bd1db5e1c Mon Sep 17 00:00:00 2001
+From a274f080608ab971a755a894bc03f98e33de450d Mon Sep 17 00:00:00 2001
 From: John Hsu <hsu@osrfoundation.org>
 Date: Wed, 10 Oct 2012 08:59:40 -0700
-Subject: [PATCH 2/4] update package.xml file
+Subject: [PATCH 2/6] update package.xml file
 
 ---
  package.xml |   40 ++++++++++++++++++++--------------------
- 1 files changed, 20 insertions(+), 20 deletions(-)
+ 1 file changed, 20 insertions(+), 20 deletions(-)
  rewrite package.xml (71%)
 
 diff --git a/package.xml b/package.xml
@@ -55,5 +55,5 @@ index ec564a0..62d78ef 100644
 +  <run_depend>urdfdom_headers</run_depend>
 +</package>
 -- 
-1.7.0.4
+1.7.9.5
 
