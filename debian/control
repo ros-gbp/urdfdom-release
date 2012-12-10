@@ -1,0 +1,12 @@
+Source: ros-groovy-urdfdom
+Section: misc
+Priority: extra
+Maintainer: John Hsu <hsu@osrfoundation.org>
+Build-Depends: debhelper (>= 7.0.50~), libboost1.46-all-dev,ros-groovy-catkin,ros-groovy-urdfdom-headers,libtinyxml-dev,ros-groovy-console-bridge
+Homepage: http://ros.org/wiki/urdf
+Standards-Version: 3.9.2
+
+Package: ros-groovy-urdfdom
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost1.46-all-dev,ros-groovy-urdfdom-headers,libtinyxml-dev,ros-groovy-console-bridge
+Description: A library to access URDFs using the DOM model.
