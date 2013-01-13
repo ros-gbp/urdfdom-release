@@ -1,39 +1,130 @@
-From 2dcb3009698cd77b2f76519ee3bb33c773242151 Mon Sep 17 00:00:00 2001
+From a65819af0eceb15059e90a53c3d66d256fc13760 Mon Sep 17 00:00:00 2001
 From: hsu <hsu@lcp1>
 Date: Wed, 10 Oct 2012 08:53:39 -0700
-Subject: [PATCH 1/6] Added a package.xml file
+Subject: [PATCH] Added a package.xml file
 
+update package.xml file
+
+update package.xml depends
+
+adding a description
+
+bump version in package.xml
+
+custom CMakeLists.txt and package.xml
+
+upadte package.xml
+
+bump version
+
+buildtool_depend on catkin
+
+bump version
 ---
- package.xml |   20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ CMakeLists.txt |   36 ++++++++++++++++++++++++++++--------
+ package.xml    |   26 ++++++++++++++++++++++++++
+ 2 files changed, 54 insertions(+), 8 deletions(-)
  create mode 100644 package.xml
 
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0a73906..a76b4e7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,9 +1,9 @@
+ cmake_minimum_required( VERSION 2.8 FATAL_ERROR )
+ project (urdfdom CXX C)
+ 
+-set (URDF_MAJOR_VERSION 0)
+-set (URDF_MINOR_VERSION 2)
+-set (URDF_PATCH_VERSION 4)
++#set (URDF_MAJOR_VERSION 0)
++#set (URDF_MINOR_VERSION 2)
++#set (URDF_PATCH_VERSION 4)
+ 
+ set (URDF_VERSION ${URDF_MAJOR_VERSION}.${URDF_MINOR_VERSION}.${URDF_PATCH_VERSION})
+ 
+@@ -38,14 +38,34 @@ find_package(Boost REQUIRED thread)
+ include_directories(${Boost_INCLUDE_DIR})
+ link_directories(${Boost_LIBRARY_DIRS})
+ 
++set(${PROJECT_NAME}_inc_dirs urdf_parser/include)
++find_package(catkin REQUIRED)
++catkin_package(
++  INCLUDE_DIRS ${${PROJECT_NAME}_inc_dirs}
++  LIBRARIES urdfdom_model urdfdom_model_state urdfdom_sensor urdfdom_world
++  DEPENDS console_bridge urdfdom_headers
++  DEPENDS Boost COMPONENTS thread
++)
++include_directories(${${PROJECT_NAME}_inc_dirs})
++
++# split version in parts and pass to preprocessor
++string(REPLACE "." ";" ${PROJECT_NAME}_VERSION_LIST "${${PROJECT_NAME}_VERSION}")
++list(LENGTH ${PROJECT_NAME}_VERSION_LIST _count)
++if(NOT _count EQUAL 3)
++  message(FATAL_ERROR "${PROJECT_NAME} version '${${PROJECT_NAME}_VERSION}' does not match 'MAJOR.MINOR.PATCH' pattern")
++endif()
++list(GET ${PROJECT_NAME}_VERSION_LIST 0 URDF_MAJOR_VERSION)
++list(GET ${PROJECT_NAME}_VERSION_LIST 1 URDF_MINOR_VERSION)
++list(GET ${PROJECT_NAME}_VERSION_LIST 2 URDF_PATCH_VERSION)
++
+ add_subdirectory(urdf_parser)
+ 
+ set(PKG_NAME ${PROJECT_NAME})
+ set(PKG_LIBRARIES urdfdom_sensor urdfdom_model_state urdfdom_model urdfdom_world)
+ set(PKG_DEPENDS urdfdom_headers console_bridge)
+ set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/urdfdom-config.cmake")
+-configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
+-install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
++#configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
++#install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
+ 
+ # Make the package config file
+ if (NOT MSVC)
+@@ -53,9 +73,9 @@ if (NOT MSVC)
+   set(PKG_DEPENDS "urdfdom_headers console_bridge") # make the list separated by spaces instead of ;
+   set(PKG_URDF_LIBS "-lurdfdom_sensor -lurdfdom_model_state -lurdfdom_model -lurdfdom_world")
+   set(pkg_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/pkgconfig/urdfdom.pc")
+-  configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)
+-  install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
++  #configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)
++  #install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
+ endif()
+ 
+ 
+-message(STATUS "Configuration successful. Type make to compile urdfdom")
++#message(STATUS "Configuration successful. Type make to compile urdfdom")
 diff --git a/package.xml b/package.xml
 new file mode 100644
-index 0000000..ec564a0
+index 0000000..00a0026
 --- /dev/null
 +++ b/package.xml
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,26 @@
 +<?xml version="1.0"?>
 +<package>
 +  <name>urdfdom</name>
-+  <version>0.2.3</version>
-+  <description></description>
-+  <maintainer email="______FILL_ME_OUT______">______FILL_ME_OUT______</maintainer>
-+  <license>______FILL_ME_OUT______</license>
++  <version>0.2.7</version>
++  <description>A library to access URDFs using the DOM model.</description>
++  <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
++  <license>BSD</license>
 +
-+  <url type="website">______FILL_ME_OUT______</url>
-+  <url type="bugtracker">______FILL_ME_OUT______</url>
-+  <url type="repository">______FILL_ME_OUT______</url>
++  <author>Wim Meeussen</author>
++  <author>John Hsu</author>
++  <url type="website">http://ros.org/wiki/urdf</url>
++  <url type="bugtracker">https://code.ros.org/trac/ros-pkg</url>
++  <url type="repository">https://bitbucket.org/osrf/urdfdom</url>
 +
-+  <author>______FILL_ME_OUT______</author>
++  <buildtool_depend>catkin</buildtool_depend>
 +
-+  <build_depend>______FILL_ME_OUT______</build_depend>
++  <build_depend>boost</build_depend>
++  <build_depend>console_bridge</build_depend>
++  <build_depend>tinyxml</build_depend>
++  <build_depend version_gte="0.2.1">urdfdom_headers</build_depend>
 +
-+  <buildtool_depend>cmake</buildtool_depend>
-+
-+  <run_depend>______FILL_ME_OUT______</run_depend>
++  <run_depend>boost</run_depend>
++  <run_depend>console_bridge</run_depend>
++  <run_depend>tinyxml</run_depend>
++  <run_depend version_gte="0.2.1">urdfdom_headers</run_depend>
 +</package>
 -- 
-1.7.9.5
+1.7.10.2 (Apple Git-33)
 
