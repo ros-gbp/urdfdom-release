@@ -1,48 +1,18 @@
-From a65819af0eceb15059e90a53c3d66d256fc13760 Mon Sep 17 00:00:00 2001
-From: hsu <hsu@lcp1>
-Date: Wed, 10 Oct 2012 08:53:39 -0700
-Subject: [PATCH] Added a package.xml file
+From 6769d92fc26a744fcf34f38b4daf666d34852796 Mon Sep 17 00:00:00 2001
+From: William Woodall <wjwwood@gmail.com>
+Date: Sat, 12 Jan 2013 18:04:25 -0800
+Subject: [PATCH] ros-ifying
 
-update package.xml file
-
-update package.xml depends
-
-adding a description
-
-bump version in package.xml
-
-custom CMakeLists.txt and package.xml
-
-upadte package.xml
-
-bump version
-
-buildtool_depend on catkin
-
-bump version
 ---
- CMakeLists.txt |   36 ++++++++++++++++++++++++++++--------
+ CMakeLists.txt |   30 +++++++++++++++++++++++++-----
  package.xml    |   26 ++++++++++++++++++++++++++
- 2 files changed, 54 insertions(+), 8 deletions(-)
+ 2 files changed, 51 insertions(+), 5 deletions(-)
  create mode 100644 package.xml
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 0a73906..a76b4e7 100644
+index d636ba2..24f891f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1,9 +1,9 @@
- cmake_minimum_required( VERSION 2.8 FATAL_ERROR )
- project (urdfdom CXX C)
- 
--set (URDF_MAJOR_VERSION 0)
--set (URDF_MINOR_VERSION 2)
--set (URDF_PATCH_VERSION 4)
-+#set (URDF_MAJOR_VERSION 0)
-+#set (URDF_MINOR_VERSION 2)
-+#set (URDF_PATCH_VERSION 4)
- 
- set (URDF_VERSION ${URDF_MAJOR_VERSION}.${URDF_MINOR_VERSION}.${URDF_PATCH_VERSION})
- 
 @@ -38,14 +38,34 @@ find_package(Boost REQUIRED thread)
  include_directories(${Boost_INCLUDE_DIR})
  link_directories(${Boost_LIBRARY_DIRS})
