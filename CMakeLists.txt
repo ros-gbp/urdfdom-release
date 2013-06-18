@@ -3,7 +3,7 @@ project (urdfdom CXX C)
 
 set (URDF_MAJOR_VERSION 0)
 set (URDF_MINOR_VERSION 2)
-set (URDF_PATCH_VERSION 7)
+set (URDF_PATCH_VERSION 8)
 
 set (URDF_VERSION ${URDF_MAJOR_VERSION}.${URDF_MINOR_VERSION}.${URDF_PATCH_VERSION})
 
@@ -56,9 +56,6 @@ if (NOT MSVC)
   configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)
   install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
 endif()
-
-# Install catkin package.xml
-install(FILES package.xml DESTINATION share/urdfdom)
 
 
 message(STATUS "Configuration successful. Type make to compile urdfdom")
