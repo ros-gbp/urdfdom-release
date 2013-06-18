@@ -1,3 +1,3 @@
 [git-buildpackage]
-upstream-branch=release/urdfdom/0.2.7
+upstream-branch=@(release_tag)
 upstream-tree=branch
