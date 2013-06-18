@@ -41,14 +41,12 @@
 
 namespace urdf{
 
-bool parseMaterial(Material &material, TiXmlElement *config);
+bool parseMaterial(Material &material, TiXmlElement *config, bool only_name_is_ok);
 bool parseLink(Link &link, TiXmlElement *config);
 bool parseJoint(Joint &joint, TiXmlElement *config);
 
 boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
 {
-  console_bridge::setLogLevel(console_bridge::LOG_INFO);
-
   boost::shared_ptr<ModelInterface> model(new ModelInterface);
   model->clear();
 
@@ -80,7 +78,7 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
     material.reset(new Material);
 
     try {
-      parseMaterial(*material, material_xml);
+      parseMaterial(*material, material_xml, false); // material needs to be fully defined here
       if (model->getMaterial(material->name))
       {
         logError("material '%s' is not unique.", material->name.c_str());
@@ -226,24 +224,39 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
 bool exportMaterial(Material &material, TiXmlElement *config);
 bool exportLink(Link &link, TiXmlElement *config);
 bool exportJoint(Joint &joint, TiXmlElement *config);
-TiXmlDocument*  exportURDF(boost::shared_ptr<ModelInterface> &model)
+TiXmlDocument*  exportURDF(const ModelInterface &model)
 {
   TiXmlDocument *doc = new TiXmlDocument();
 
   TiXmlElement *robot = new TiXmlElement("robot");
-  robot->SetAttribute("name", model->name_);
+  robot->SetAttribute("name", model.name_);
   doc->LinkEndChild(robot);
 
-  for (std::map<std::string, boost::shared_ptr<Link> >::const_iterator l=model->links_.begin(); l!=model->links_.end(); l++)  
-    exportLink(*(l->second), robot);
 
-  for (std::map<std::string, boost::shared_ptr<Joint> >::const_iterator j=model->joints_.begin(); j!=model->joints_.end(); j++)  
+  for (std::map<std::string, boost::shared_ptr<Material> >::const_iterator m=model.materials_.begin(); m!=model.materials_.end(); m++)
+  {
+    logDebug("exporting material [%s]\n",m->second->name.c_str());
+    exportMaterial(*(m->second), robot);
+  }
+
+  for (std::map<std::string, boost::shared_ptr<Link> >::const_iterator l=model.links_.begin(); l!=model.links_.end(); l++)  
+  {
+    logDebug("exporting link [%s]\n",l->second->name.c_str());
+    exportLink(*(l->second), robot);
+  }
+  	
+  for (std::map<std::string, boost::shared_ptr<Joint> >::const_iterator j=model.joints_.begin(); j!=model.joints_.end(); j++)  
   {
     logDebug("exporting joint [%s]\n",j->second->name.c_str());
     exportJoint(*(j->second), robot);
   }
 
   return doc;
+}
+    
+TiXmlDocument*  exportURDF(boost::shared_ptr<ModelInterface> &model)
+{
+  return exportURDF(*model);
 }
 
 

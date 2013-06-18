@@ -1,25 +1,29 @@
 <?xml version="1.0"?>
 <package>
   <name>urdfdom</name>
-  <version>0.2.4</version>
+  <version>0.2.8</version>
   <description>A library to access URDFs using the DOM model.</description>
   <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
+  <maintainer email="isucan@willowgarage.com">Ioan Sucan</maintainer>
+
   <license>BSD</license>
 
+  <author>Wim Meeussen</author>
+  <author>John Hsu</author>
   <url type="website">http://ros.org/wiki/urdf</url>
-  <url type="bugtracker">https://code.ros.org/trac/ros-pkg</url>
-  <url type="repository">http://kforge.ros.org/robotmodel/urdfdom</url>
+  <url type="bugtracker">https://bitbucket.org/osrf/urdfdom</url>
+  <url type="repository">https://bitbucket.org/osrf/urdfdom</url>
 
-  <author>Wim Meeussen, John Hsu</author>
-
-  <build_depend version_gte="0.2.1">urdfdom_headers</build_depend>
-  <run_depend version_gte="0.2.1">urdfdom_headers</run_depend>
+  <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>boost</build_depend>
-  <run_depend>boost</run_depend>
-
+  <build_depend>console_bridge</build_depend>
   <build_depend>tinyxml</build_depend>
-  <run_depend>tinyxml</run_depend>
+  <build_depend version_gte="0.2.3">urdfdom_headers</build_depend>
 
-  <buildtool_depend>cmake</buildtool_depend>
+  <run_depend>boost</run_depend>
+  <run_depend>catkin</run_depend>
+  <run_depend>console_bridge</run_depend>
+  <run_depend>tinyxml</run_depend>
+  <run_depend version_gte="0.2.3">urdfdom_headers</run_depend>
 </package>
