@@ -2,15 +2,19 @@ include_directories(include)
 
 add_library(urdfdom_world SHARED src/pose.cpp src/model.cpp src/link.cpp src/joint.cpp src/world.cpp)
 target_link_libraries(urdfdom_world ${tinyxml_libraries} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(urdfdom_world PROPERTIES SOVERSION 0.2)
 
 add_library(urdfdom_model SHARED src/pose.cpp src/model.cpp src/link.cpp src/joint.cpp)
 target_link_libraries(urdfdom_model ${tinyxml_libraries} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(urdfdom_model PROPERTIES SOVERSION 0.2)
 
 add_library(urdfdom_sensor SHARED src/urdf_sensor.cpp)
 target_link_libraries(urdfdom_sensor urdfdom_model ${tinyxml_libraries} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(urdfdom_sensor PROPERTIES SOVERSION 0.2)
 
 add_library(urdfdom_model_state SHARED src/urdf_model_state.cpp src/twist.cpp)
 target_link_libraries(urdfdom_model_state ${tinyxml_libraries} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(urdfdom_model_state PROPERTIES SOVERSION 0.2)
 
 # --------------------------------
 
@@ -24,9 +28,10 @@ add_executable(urdf_mem_test test/memtest.cpp)
 target_link_libraries(urdf_mem_test urdfdom_model)
 
 
-INSTALL(TARGETS urdfdom_model DESTINATION lib/)
-INSTALL(TARGETS urdfdom_world DESTINATION lib/)
-INSTALL(TARGETS check_urdf urdf_to_graphiz urdf_mem_test DESTINATION share/${PROJECT_NAME})
-INSTALL(TARGETS urdfdom_sensor DESTINATION lib/)
-INSTALL(TARGETS urdfdom_model_state DESTINATION lib/)
-INSTALL(DIRECTORY include/urdf_parser DESTINATION include)
+INSTALL(TARGETS urdfdom_model DESTINATION ${CMAKE_INSTALL_LIBDIR})
+INSTALL(TARGETS urdfdom_world DESTINATION ${CMAKE_INSTALL_LIBDIR})
+INSTALL(TARGETS check_urdf urdf_to_graphiz urdf_mem_test
+  DESTINATION ${CMAKE_INSTALL_BINDIR})
+INSTALL(TARGETS urdfdom_sensor DESTINATION ${CMAKE_INSTALL_LIBDIR})
+INSTALL(TARGETS urdfdom_model_state DESTINATION ${CMAKE_INSTALL_LIBDIR})
+INSTALL(DIRECTORY include/urdf_parser DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
