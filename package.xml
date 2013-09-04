@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>urdfdom</name>
-  <version>0.2.8</version>
+  <version>0.2.9</version>
   <description>A library to access URDFs using the DOM model.</description>
   <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
   <maintainer email="isucan@willowgarage.com">Ioan Sucan</maintainer>
@@ -11,8 +11,8 @@
   <author>Wim Meeussen</author>
   <author>John Hsu</author>
   <url type="website">http://ros.org/wiki/urdf</url>
-  <url type="bugtracker">https://bitbucket.org/osrf/urdfdom</url>
-  <url type="repository">https://bitbucket.org/osrf/urdfdom</url>
+  <url type="bugtracker">https://github.com/ros/urdfdom/issues</url>
+  <url type="repository">https://github.com/ros/urdfdom</url>
 
   <build_depend>boost</build_depend>
   <build_depend>console_bridge</build_depend>
