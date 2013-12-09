@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>urdfdom</name>
-  <version>0.2.9</version>
+  <version>0.2.10</version>
   <description>A library to access URDFs using the DOM model.</description>
   <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
   <maintainer email="isucan@willowgarage.com">Ioan Sucan</maintainer>
