@@ -17,11 +17,11 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 # If compiler support symbol visibility, enable it.
-include(CheckCCompilerFlag)
-check_c_compiler_flag(-fvisibility=hidden HAS_VISIBILITY)
-if (HAS_VISIBILITY)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
-endif()
+#include(CheckCCompilerFlag)
+#check_c_compiler_flag(-fvisibility=hidden HAS_VISIBILITY)
+#if (HAS_VISIBILITY)
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+#endif()
 
 # This shouldn't be necessary, but there has been trouble
 # with MSVC being set off, but MSVCXX ON.
@@ -68,13 +68,10 @@ if (NOT MSVC)
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig/ COMPONENT pkgconfig)
 endif()
 
-#add_subdirectory(urdf_parser_py)
+add_subdirectory(urdf_parser_py)
 
 message(STATUS "Configuration successful. Type make to compile urdfdom")
 
 SET_DIRECTORY_PROPERTIES(PROPERTIES
   ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_BINARY_DIR}/cmake/urdfdom-config.cmake
   ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_BINARY_DIR}/cmake/pkgconfig/urdfdom.pc)
-
-# Install catkin package.xml
-install(FILES package.xml DESTINATION share/urdfdom)
