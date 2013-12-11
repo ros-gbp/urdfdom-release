@@ -1,4 +1,4 @@
-From 8b60f55e3f1605ceee4ba161cfa206409ec56796 Mon Sep 17 00:00:00 2001
+From 6347a8076289f706b88c2506d69f4dc141acaf38 Mon Sep 17 00:00:00 2001
 From: isucan <isucan@gmail.com>
 Date: Thu, 5 Sep 2013 01:31:29 +0300
 Subject: [PATCH] Added install rule for package.xml
@@ -27,5 +27,5 @@ index b9d4af5..9b6f5e9 100644
 +# Install catkin package.xml
 +install(FILES package.xml DESTINATION share/urdfdom)
 -- 
-1.8.5.1
+1.8.1.2
 
