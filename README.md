@@ -1,3 +1,22 @@
+## urdfdom - 0.2.10-3
+
+User `isucan@e6400` released the packages in the `urdfdom` repository by running `/usr/bin/bloom-release -t hydro -r hydro urdfdom` on `Wed, 11 Dec 2013 05:59:13 -0000`
+
+The `urdfdom` package was released.
+
+Version of package(s) in repository `urdfdom`:
+- rosdistro version: `0.2.10-2`
+- old version: `0.2.10-2`
+- new version: `0.2.10-3`
+
+Versions of tools used:
+- bloom version: `0.4.4`
+- catkin_pkg version: `0.1.24`
+- rosdep version: `0.10.24`
+- rosdistro version: `0.2.19`
+- vcstools version: `0.1.32`
+
+
 ## urdfdom - 0.2.10-2
 
 User `isucan@isucan-glaptop0` released the packages in the `urdfdom` repository by running `/usr/bin/bloom-release urdfdom -t hydro -r hydro` on `Tue, 10 Dec 2013 08:23:26 -0000`
