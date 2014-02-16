@@ -71,10 +71,13 @@ if (NOT MSVC)
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig/ COMPONENT pkgconfig)
 endif()
 
-add_subdirectory(urdf_parser_py)
+#add_subdirectory(urdf_parser_py)
 
 message(STATUS "Configuration successful. Type make to compile urdfdom")
 
 SET_DIRECTORY_PROPERTIES(PROPERTIES
   ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_BINARY_DIR}/cmake/urdfdom-config.cmake
   ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_BINARY_DIR}/cmake/pkgconfig/urdfdom.pc)
+
+# Install catkin package.xml
+install(FILES package.xml DESTINATION share/urdfdom)
