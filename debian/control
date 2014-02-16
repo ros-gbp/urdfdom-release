@@ -1,0 +1,12 @@
+Source: ros-indigo-urdfdom
+Section: misc
+Priority: extra
+Maintainer: John Hsu <hsu@osrfoundation.org>
+Build-Depends: debhelper (>= 7.0.50~), libboost-all-dev, libtinyxml-dev, ros-indigo-console-bridge, ros-indigo-urdfdom-headers (>= 0.3.0)
+Homepage: http://ros.org/wiki/urdf
+Standards-Version: 3.9.2
+
+Package: ros-indigo-urdfdom
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-all-dev, libtinyxml-dev, ros-indigo-catkin, ros-indigo-console-bridge, ros-indigo-urdfdom-headers (>= 0.3.0)
+Description: A library to access URDFs using the DOM model.
