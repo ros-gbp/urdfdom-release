@@ -1,0 +1,12 @@
+Source: ros-indigo-urdfdom
+Section: misc
+Priority: extra
+Maintainer: John Hsu <hsu@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), cmake
+Homepage: http://ros.org/wiki/urdf
+Standards-Version: 3.9.2
+
+Package: ros-indigo-urdfdom
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, liburdfdom-dev
+Description: A temporary pass through to the urdfdom rosdep. You should depend on liburdfdom-dev directly.
