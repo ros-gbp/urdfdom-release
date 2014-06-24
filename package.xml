@@ -2,7 +2,7 @@
 <package>
   <name>urdfdom</name>
   <version>0.3.0</version>
-  <description>A library to access URDFs using the DOM model.</description>
+  <description>A temporary pass through to the urdfdom rosdep. You should depend on liburdfdom-dev directly.</description>
   <maintainer email="hsu@osrfoundation.org">John Hsu</maintainer>
   <maintainer email="isucan@google.com">Ioan Sucan</maintainer>
 
@@ -15,16 +15,8 @@
   <url type="bugtracker">https://github.com/ros/urdfdom/issues</url>
   <url type="repository">https://github.com/ros/urdfdom</url>
 
-  <build_depend>boost</build_depend>
-  <build_depend>console_bridge</build_depend>
-  <build_depend>tinyxml</build_depend>
-  <build_depend version_gte="0.3.0">urdfdom_headers</build_depend>
-
-  <run_depend>boost</run_depend>
-  <run_depend>catkin</run_depend>
-  <run_depend>console_bridge</run_depend>
-  <run_depend>tinyxml</run_depend>
-  <run_depend version_gte="0.3.0">urdfdom_headers</run_depend>
+  <build_depend>cmake</build_depend>
+  <run_depend>liburdfdom-dev</run_depend>
   
   <export>
     <build_type>cmake</build_type>
